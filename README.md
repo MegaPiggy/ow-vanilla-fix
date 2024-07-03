@@ -13,3 +13,4 @@ Fixes some vanilla bugs in Outer Wilds
 - Fixes a softlock with ship logs and mods with custom facts (like The Outsider).
 - Fixes a hard-to-find visual bug with projection pools.
 - [Fixes an issue where probe would sometimes stretch when anchored to an object](https://github.com/JohnCorby/ow-vanilla-fix/issues/7). This isn't a perfect solution, but it is not possible to do it better in unity.
+- No longer make conceal or focus sounds for malfunctioning dream lantern. (credit to MegaPiggy)
