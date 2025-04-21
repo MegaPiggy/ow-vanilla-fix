@@ -6,7 +6,7 @@ namespace VanillaFix;
 /// <summary>
 /// CREDIT TO MEGAPIGGY FOR THIS FIX
 ///
-/// don't make conceal or focus sounds for malfunctioning dream lanterns
+/// don't make conceal or focus sounds for invalid, nonfunctioning, and malfunctioning dream lanterns
 /// </summary>
 [HarmonyPatch(typeof(DreamLanternItem))]
 public static class MalfunctioningLanternFix
@@ -15,6 +15,16 @@ public static class MalfunctioningLanternFix
 	[HarmonyPatch(nameof(DreamLanternItem.Update))]
 	private static bool Update(DreamLanternItem __instance)
 	{
-		return __instance.GetLanternType() == DreamLanternType.Functioning; // only allow functioning dream lanterns to update
+		switch (__instance.GetLanternType())
+		{
+			// don't allow the bad dream lanterns to update conceal and focus
+			case DreamLanternType.Invalid:
+			case DreamLanternType.Nonfunctioning:
+			case DreamLanternType.Malfunctioning:
+				return false;
+			case DreamLanternType.Functioning:
+			default: // Just in case some other mod adds a new type
+				return true;
+		}
 	}
 }
